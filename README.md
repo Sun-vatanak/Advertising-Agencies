@@ -24,7 +24,7 @@ This guide walks you through setting up your Laravel project with  My SQL  datab
    Update the database settings in `.env`:
 
    ```
-   DB_CONNECTION=pgsql
+   DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=5432
    DB_DATABASE=your_database
