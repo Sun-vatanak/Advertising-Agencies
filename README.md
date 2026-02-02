@@ -10,8 +10,7 @@ This guide walks you through setting up your Laravel project with  My SQL  datab
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/Sun-vatanak/moblieapp-api-nu.git
-   cd moblieapp-api-nu
+   git clone https://github.com/Sun-vatanak/Advertising-Agencies.git
    ```
 
 2. **Copy the example environment file**
