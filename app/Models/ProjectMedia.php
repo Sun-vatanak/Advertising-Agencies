@@ -16,4 +16,8 @@ class ProjectMedia extends Model
     {
         return $this->belongsTo(Project::class);
     }
+    protected $casts = [
+        'tech_stack' => 'array',
+        'is_featured' => 'boolean'
+    ];
 }

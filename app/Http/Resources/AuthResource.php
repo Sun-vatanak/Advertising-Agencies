@@ -19,7 +19,9 @@ class AuthResource extends JsonResource
             'email'      => $this->email,
             'role_id'    => $this->role_id,
             'is_active'  => $this->is_active,
+            'token'      => $this->token,
             'profile'    => $this->profile,
+
             // Add other fields as needed
         ];
     }

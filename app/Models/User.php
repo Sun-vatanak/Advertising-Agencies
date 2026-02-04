@@ -1,49 +1,43 @@
 <?php
 
-
 namespace App\Models;
 
-use App\Models\Delivery;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use PhpParser\Node\Expr\FuncCall;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'users';
     protected $fillable = [
         'email',
         'password',
         'role_id',
+        'is_active',
         'telegram_id',
-        'is_active'
     ];
-
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
-    protected function casts(): array
+    /**
+     * Get the role that belongs to the user.
+     */
+    public function role()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Role::class);
     }
-
-    public function profile()
+       public function profile()
     {
-        return $this->hasOne(UserProfile::class, 'user_id', 'id');
+        return $this->hasOne(UserProfile::class);
     }
-
-
-
 }

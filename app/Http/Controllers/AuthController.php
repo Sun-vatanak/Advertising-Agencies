@@ -40,14 +40,14 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken('API Token')->plainTextToken;
-
+        $user->token = $token;
         $userData = new AuthResource($user);
         $userData->additional(['token' => $token]);
 
         return response()->json([
-            'result' => true,
-            'message' => 'User registered successfully.',
-            'data' => $userData,
+            'result'  => true,
+            'message' => 'Login successful',
+            'data'    => new AuthResource($user),
         ]);
     }
 
@@ -82,31 +82,19 @@ class AuthController extends Controller
             ]);
         }
 
-        if ($user->role_id == 2 && !$user->vendor) {
-            return response()->json([
-                'result' => false,
-                'message' => 'Vendor information is missing. Please complete vendor profile before logging in.',
-                'data' => []
-            ]);
-        }
-
-        if ($user->role_id == 3 && !$user->delivery) {
-            return response()->json([
-                'result' => false,
-                'message' => 'delivery information is missing. Please complete delivery profile before logging in.',
-                'data' => []
-            ]);
-        }
+      
+        // Inside public function login(Request $req) ...
 
         $token = $user->createToken('API Token')->plainTextToken;
 
-        $userData = new AuthResource($user);
-        $userData->additional(['token' => $token]);
+        // Attach token to the model so AuthResource can see it
+        $user->token = $token;
 
         return response()->json([
-            'result' => true,
+            'result'  => true,
             'message' => 'Login successful',
-            'data' => $userData,
+            // Pass the user (who now has the token property attached)
+            'data'    => new AuthResource($user),
         ]);
     }
 
