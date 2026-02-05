@@ -40,7 +40,6 @@ Route::middleware(['is_login','is_admin' ])->group(function () {
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
     // Services routes
     Route::post('/services', [SeviceController::class, 'store']);
-
     Route::delete('/services/{id}', [SeviceController::class, 'destroy']);
 
 });
